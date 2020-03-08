@@ -157,6 +157,12 @@ def download_merge_urls(urls, dest_path):
         merger.append(pdf_reader)
     print()
 
+    # Ensure containing directory
+    containing_dir = Path(dest_path).parent
+    if not os.path.isdir(containing_dir):
+        print('Creating directory', containing_dir)
+        os.makedirs(containing_dir)
+
     print(f'Writing pdfs to {dest_path}')
     merger.write(dest_path)
     print('Done')
