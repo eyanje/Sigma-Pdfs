@@ -226,9 +226,9 @@ parser = ArgumentParser(description='Downloads and perges pdfs from the History 
 parser.add_argument('url', nargs='*')
 # Allows all urls to be merged into one pdf
 parser.add_argument('--cu', '--clipboard-urls', action='store', dest='sep',
-        help=r'Include urls stored in the clipboard, delimited by sep. Use n to specify newlines.')
+        help=r'Include urls stored in the clipboard as plain text, delimited by sep. Use n to specify newlines.')
 parser.add_argument('--cl', '--clipboard-links', action='store_true',
-        help='Include urls stored in links in the clipboard')
+        help='Include urls from links in the clipboard')
 parser.add_argument('-n', '--name', action='store', dest='name',
         help='Saves the PDF with a specified name')
 parser.add_argument('-t', '--together', action='store_true', dest='together',

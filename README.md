@@ -32,10 +32,10 @@ positional arguments:
 optional arguments:
   -h, --help            show this help message and exit
   --cu SEP, --clipboard-urls SEP
-                        Include urls stored in the clipboard, delimited by
-                        sep. Use n to specify newlines.
+                        Include urls stored in the clipboard as plain text,
+                        delimited by sep. Use n to specify newlines.
   --cl, --clipboard-links
-                        Include urls stored in links in the clipboard
+                        Include urls from links in the clipboard
   -n NAME, --name NAME  Saves the PDF with a specified name
   -t, --together        Merges all urls into one pdf, even if multiple urls
                         are passed
