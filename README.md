@@ -1,14 +1,14 @@
 # Sigma, a PDF dowloader for History Bowl
 
-## Prerequisites
+## Setup
 
 You will need [Python 3](//python.org) to run these.
 
 Python packages
 
- - BeautifulSoup 4
- - PyPDF2
- - dotenv
+ - [dotenv](//pypi.org/project/python-dotenv/)
+ - [BeautifulSoup 4](//pypi.org/project/beautifulsoup4/)
+ - [PyPDF2](//pypi.org/project/PyPDF2/)
 
 You can install them with
 ```
