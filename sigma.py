@@ -6,7 +6,7 @@ from itertools import chain
 import os
 from pathlib import Path
 import re
-from urllib import request
+from urllib import parse,request
 from tkinter import Tk
 
 from bs4 import BeautifulSoup
@@ -31,6 +31,10 @@ def urlopen(url):
     """
     Opens the url with a special User-Agent
     """
+    parts = list(parse.urlparse(url))
+    parts[2] = parse.quote(parts[2])
+    url = parse.urlunparse(parts)
+
     user_agent = 'Mozilla/5.0 Gecko/20100101 Firefox/68.0' 
     headers = {
         'User-Agent': user_agent
