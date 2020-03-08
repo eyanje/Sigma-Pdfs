@@ -6,9 +6,9 @@ You will need [Python 3](//python.org) to run these.
 
 Python packages
 
-	- BeautifulSoup 4
-	- PyPDF2
-	- dotenv
+ - BeautifulSoup 4
+ - PyPDF2
+ - dotenv
 
 You can install them with
 ```
