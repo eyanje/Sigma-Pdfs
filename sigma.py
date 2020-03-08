@@ -27,13 +27,17 @@ def progress_bar(progress):
     unprog = '.' * (progress_bar_len - displayed)
     return f'[{prog}{unprog}]'
 
+def quote_url(url):
+    parts = list(parse.urlparse(url))
+    parts[2] = parse.quote(parts[2])
+    url = parse.urlunparse(parts)
+    return url
+
 def urlopen(url):
     """
     Opens the url with a special User-Agent
     """
-    parts = list(parse.urlparse(url))
-    parts[2] = parse.quote(parts[2])
-    url = parse.urlunparse(parts)
+    url = quote_url(url)
 
     user_agent = 'Mozilla/5.0 Gecko/20100101 Firefox/68.0' 
     headers = {
@@ -99,7 +103,8 @@ def get_pdf_urls_rec(url, link_whitelist=default_link_whitelist):
 
 def convert_hex(hex_codes):
     codes = hex_codes.strip().split(' ')
-    text = ''.join(chr(int(c, 16)) for c in codes)
+    b = bytes(int(c, 16) for c in codes)
+    text = b.decode('utf-8')
     return text
 
 def read_clipboard_urls(sep=None):
@@ -120,7 +125,7 @@ def get_clipboard_html():
     tk = Tk()
     tk.withdraw()
     
-    clip = tk.clipboard_get(ype='text/html')
+    clip = tk.clipboard_get(type='text/html')
     del tk
     html = convert_hex(clip)
 
@@ -157,8 +162,13 @@ def download_merge_urls(urls, dest_path):
     for i,url in enumerate(urls):
         progress = (i + 1)/len(urls)
         print(f'\r{progress_bar(progress)} {(i+1)}/{len(urls)}', end='')
-        pdf_reader = fetch_pdf(url)
-        merger.append(pdf_reader)
+        try:
+            pdf_reader = fetch_pdf(url)
+            merger.append(pdf_reader)
+        except Exception as e:
+            print()
+            print(f'Error on PDF at {url}:')
+            print(str(e))
     print()
 
     # Ensure containing directory
@@ -206,7 +216,7 @@ def download_all_together(urls, name=None):
         dl_urls.extend(pdf_urls)
 
     dlPath = get_download_path(name)
-    download_merge_urls(pdf_urls, dlPath)
+    download_merge_urls(dl_urls, dlPath)
 
 def download_all_conditional(urls, name=None, together=False):
     if together:
